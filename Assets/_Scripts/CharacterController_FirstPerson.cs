@@ -8,41 +8,56 @@ public class CharacterController_FirstPerson : MonoBehaviour
 
     [Header("Sprint Settings")]
     public bool ToggleToSprint = false;           // false = hold to sprint, true = press to sprint
-    public float baseSprintSpeed = 9f;          // initial sprint speed
-    public float maxSprintSpeed = 15f;          // maximum sprint speed
+    public float baseSprintSpeed = 9f;            // initial sprint speed
+    public float maxSprintSpeed = 15f;            // maximum sprint speed
     public float sprintAcceleration = 1.7f;       // acceleration before sprintBurstThreshold
-    public float sprintBurstAcceleration = 14f; // acceleration after sprintBurstThreshold
-    public float sprintDecaySpeed = 3f;          // decay speed when not sprinting
-    public float sprintBurstThreshold = 2.5f;      // time in seconds before burst kicks in
+    public float sprintBurstAcceleration = 14f;   // acceleration after sprintBurstThreshold
+    public float sprintDecaySpeed = 3f;           // decay speed when not sprinting
+    public float sprintBurstThreshold = 2.5f;     // time in seconds before burst kicks in
 
     [Header("Camera FOV Settings")]
-    public Camera playerCamera;                  // assign your main camera here
+    public Camera playerCamera;                   // assign your main camera here
     public float normalFOV = 60f;
     public float maxSprintFOV = 70f;
-    public float fovChangeSpeed = 8f;           // how fast FOV changes
+    public float fovChangeSpeed = 8f;
 
-    [Header("Other Settings")]
-    public float gravity = -9.81f;
+    [Header("Jump Settings")]
+    public float jumpHeight = 2f;
+    public float jumpHoldTime = 0.2f;        // How long you can hold the button for higher jump
+    public float jumpHoldGravityMultiplier = 0.5f;
+
+    private bool isJumping = false;
+    private float jumpHoldTimer = 0f;
+
+
+    [Header("Fall Settings")]
+    public float baseFallGravity = 10f;
+    public float maxFallGravity = 30f;
+    public float fallGravityScaling = 2f;
 
     [Header("References")]
     public Transform groundCheck;
     public LayerMask groundMask;
+    public float groundDistance = 0.4f;
 
     private CharacterController controller;
     private Vector3 velocity;
-    private bool isGrounded;
-
-    public float groundDistance = 0.4f;
+    private bool isGrounded = true;
 
     // Internal sprint state
     private bool sprinting = false;
     private float currentSprintSpeed;
     private float sprintTimer = 0f;
 
+    // Fall tracking
+    private float currentFallGravity;
+    private float airTime;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         currentSprintSpeed = baseSprintSpeed;
+        currentFallGravity = baseFallGravity;
 
         if (playerCamera != null)
         {
@@ -52,8 +67,10 @@ public class CharacterController_FirstPerson : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(currentFallGravity);
         HandleSprintInput();
         HandleMovement();
+        HandleJump();
         HandleFOV();
     }
 
@@ -77,9 +94,22 @@ public class CharacterController_FirstPerson : MonoBehaviour
         // Ground check
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0)
+        if (isGrounded)
         {
-            velocity.y = -2f;
+            if (velocity.y < 0)
+                velocity.y = -2f;
+
+            currentFallGravity = baseFallGravity;
+            airTime = 0f;
+        }
+        else
+        {
+            // Apply fall acceleration
+            airTime += Time.deltaTime;
+            currentFallGravity += fallGravityScaling * Time.deltaTime * currentFallGravity;
+            currentFallGravity = Mathf.Clamp(currentFallGravity, baseFallGravity, maxFallGravity);
+            velocity.y -= currentFallGravity * Time.deltaTime;
+            //Debug.Log(currentFallGravity);
         }
 
         // Get input
@@ -94,12 +124,10 @@ public class CharacterController_FirstPerson : MonoBehaviour
 
             if (sprintTimer < sprintBurstThreshold)
             {
-                // Gradual acceleration
                 currentSprintSpeed += sprintAcceleration * Time.deltaTime;
             }
             else
             {
-                // Radical burst acceleration
                 currentSprintSpeed += sprintBurstAcceleration * Time.deltaTime;
             }
 
@@ -107,7 +135,6 @@ public class CharacterController_FirstPerson : MonoBehaviour
         }
         else
         {
-            // Reset sprint timer and decay speed when not sprinting or not moving
             sprintTimer = 0f;
             currentSprintSpeed -= sprintDecaySpeed * Time.deltaTime;
             currentSprintSpeed = Mathf.Max(currentSprintSpeed, baseSprintSpeed);
@@ -118,11 +145,52 @@ public class CharacterController_FirstPerson : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
 
-
-        // Gravity
-        velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
+    private void HandleJump()
+    {
+        // Start jump
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * 2f * baseFallGravity);
+            isJumping = true;
+            jumpHoldTimer = 0f;
+            currentFallGravity = baseFallGravity;
+            airTime = 0f;
+        }
+
+        // Variable height logic (hold to go higher)
+        if (Input.GetButton("Jump") && isJumping)
+        {
+            if (jumpHoldTimer < jumpHoldTime)
+            {
+                // Reduce gravity to prolong upward motion
+                velocity.y += baseFallGravity * jumpHoldGravityMultiplier * Time.deltaTime;
+                jumpHoldTimer += Time.deltaTime;
+            }
+        }
+
+        // If jump is released or timer runs out, stop extending jump
+        if (Input.GetButtonUp("Jump"))
+        {
+            isJumping = false;
+
+            // CUT the upward velocity for small hop
+            if (velocity.y > 0)
+            {
+                velocity.y *= 0.3f; // You can adjust this — lower = sharper cut
+            }
+        }
+
+
+        // Cancel jump if falling
+        if (velocity.y <= 0)
+        {
+            isJumping = false;
+        }
+    }
+
 
     void HandleFOV()
     {
@@ -130,7 +198,6 @@ public class CharacterController_FirstPerson : MonoBehaviour
 
         float targetFOV = normalFOV;
 
-        // Change FOV only during radical sprint burst phase
         if (sprinting && sprintTimer >= sprintBurstThreshold)
         {
             targetFOV = maxSprintFOV;
