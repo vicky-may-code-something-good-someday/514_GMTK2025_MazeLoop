@@ -112,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3078585924835234734, guid: 6add926607dcbfc4f9cf2e91c6baeac6, type: 3}
       propertyPath: m_Name
-      value: wl_tile_concrete Z Variant
+      value: wl_tile_door Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
