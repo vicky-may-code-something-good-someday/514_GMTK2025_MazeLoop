@@ -2,19 +2,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.WSA;
 
 public class RewindData : MonoBehaviour
 {
     [Header("Rewind Settings")]
-    [SerializeField] float rewindSpeed = 2f;
-    [SerializeField] int maxRewindTime_InSeconds = 600;
+    [SerializeField] int rewindSpeed = 2;
+    [SerializeField] int maxRewindedTime_inSeconds = 600;
+    [SerializeField] bool isRewinderCollected = true;
 
     bool isRewinding = false;
     float rewindTimeBank = 10f;
     List<StateInTime> objectStatesInTime = new List<StateInTime>();
 
     [Header("References")]
-    [SerializeField] TMP_Text textRewindTimeBank;
+    [SerializeField] TMP_Text textUI_TimeBank;
 
     Rigidbody rb;
     CharacterController_FirstPerson characterController;
@@ -25,13 +27,14 @@ public class RewindData : MonoBehaviour
         characterController = GetComponent<CharacterController_FirstPerson>();
         rb = GetComponent<Rigidbody>();
         GM = GameManager.GM;
-        if (textRewindTimeBank == null)
+        if (textUI_TimeBank == null)
         {
             Debug.LogError("TextRewindTimeBank is not assigned in the inspector.");
         }
         else
         {
-            textRewindTimeBank.SetText($"Rewind Time Bank: {rewindTimeBank:F2}");
+            textUI_TimeBank.gameObject.SetActive(false);
+            textUI_TimeBank.SetText($"Rewind Time Bank: {rewindTimeBank:F2}");
         }
 
         if (characterController == null)
@@ -46,19 +49,22 @@ public class RewindData : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (isRewinderCollected)
         {
-            StartRewind();
-        }
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            StopRewind();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartRewind();
+            }
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                StopRewind();
+            }
         }
     }
 
     void FixedUpdate()
     {
-        if (isRewinding)
+        if (isRewinding && isRewinderCollected)
         {
             Rewind();
         }
@@ -73,7 +79,7 @@ public class RewindData : MonoBehaviour
     void Record()
     {
         // Limits the Max Rewind Time
-        if (objectStatesInTime.Count > Mathf.RoundToInt(maxRewindTime_InSeconds / Time.fixedDeltaTime))
+        if (objectStatesInTime.Count > Mathf.RoundToInt(maxRewindedTime_inSeconds / Time.fixedDeltaTime))
         {
             objectStatesInTime.RemoveAt(objectStatesInTime.Count - 1);
         }
@@ -98,12 +104,14 @@ public class RewindData : MonoBehaviour
         }
         rewindTimeBank -= Time.fixedDeltaTime * rewindSpeed;
         rewindTimeBank = Mathf.Max(rewindTimeBank, 0f);
-        textRewindTimeBank.text = $"Rewind Time Bank: {rewindTimeBank:F2}";
+        textUI_TimeBank.text = $"Rewind Time Bank: {rewindTimeBank:F2}";
         GM.RewindGameTime(Time.fixedDeltaTime, rewindSpeed);
 
         transform.SetPositionAndRotation(objectStatesInTime[0].Position, objectStatesInTime[0].Rotation);
         objectStatesInTime.RemoveAt(0);
 
+        // Remove states based on rewind speed
+        // Problem: only works with integer rewind speeds
         for (int i = 0; i < rewindSpeed; i++)
         {
             if (objectStatesInTime.Count > 0)
@@ -140,7 +148,14 @@ public class RewindData : MonoBehaviour
     public void AddTimeBank(float amount)
     {
         rewindTimeBank += amount;
-        textRewindTimeBank.text = $"Rewind Time Bank: {rewindTimeBank:F2}";
+        textUI_TimeBank.text = $"Rewind Time Bank: {rewindTimeBank:F2}";
         // play feedback effects for the added time bank (eg. particle effect around the time, text increasing in size, time counting up)
     }
+
+    public void ActivateRewindMechanic()
+    {
+        isRewinderCollected = true;
+        textUI_TimeBank.gameObject.SetActive(true);
+    }
+
 }

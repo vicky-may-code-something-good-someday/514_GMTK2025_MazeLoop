@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text text_gameTime;
     float rewindedTime = 0f;
 
-    // Update is called once per frame
     void Update()
     {
         text_gameTime.text = (Time.time - rewindedTime).ToString("F2");
