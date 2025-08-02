@@ -9,7 +9,7 @@ public class RewindData : MonoBehaviour
     [Header("Rewind Settings")]
     [SerializeField] int rewindSpeed = 2;
     [SerializeField] int maxRewindedTime_inSeconds = 600;
-    [SerializeField] bool isRewinderCollected = true;
+    [SerializeField] bool isRewindingPossible = true;
 
     bool isRewinding = false;
     float rewindTimeBank = 10f;
@@ -49,7 +49,7 @@ public class RewindData : MonoBehaviour
 
     void Update()
     {
-        if (isRewinderCollected)
+        if (isRewindingPossible)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -64,7 +64,7 @@ public class RewindData : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isRewinding && isRewinderCollected)
+        if (isRewinding && isRewindingPossible)
         {
             Rewind();
         }
@@ -152,9 +152,24 @@ public class RewindData : MonoBehaviour
         // play feedback effects for the added time bank (eg. particle effect around the time, text increasing in size, time counting up)
     }
 
+    public void FreezeRewindMechanic()
+    {
+        if (!isRewinding)
+        {
+            isRewindingPossible = false;
+            GM.SetPauseGameTime(true);
+        }
+    }
+
+    public void UnfreezeRewindMechanic()
+    {
+        isRewindingPossible = true;
+        GM.SetPauseGameTime(false);
+    }
+
     public void ActivateRewindMechanic()
     {
-        isRewinderCollected = true;
+        isRewindingPossible = true;
         textUI_TimeBank.gameObject.SetActive(true);
     }
 
