@@ -203,4 +203,25 @@ public class CharacterController_FirstPerson : MonoBehaviour
 
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovChangeSpeed * Time.deltaTime);
     }
+
+    public void FreezeMovement()
+    {
+        controller.enabled = false;
+        velocity = Vector3.zero;
+        isGrounded = true;
+        currentSprintSpeed = baseSprintSpeed;
+        currentFallGravity = baseFallGravity;
+        airTime = 0f;
+
+        if (playerCamera != null)
+        {
+            playerCamera.fieldOfView = normalFOV;
+        }
+
+    }
+
+    public void UnfreezeMovement()
+    {
+        controller.enabled = true;
+    }
 }
