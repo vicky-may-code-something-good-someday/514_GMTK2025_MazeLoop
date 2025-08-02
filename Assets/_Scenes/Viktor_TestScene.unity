@@ -492,17 +492,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1597876357490965763, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1608425576210504766, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter_FirstPerson
-      objectReference: {fileID: 0}
-    - target: {fileID: 1608425576210504766, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2111440495359995585, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -544,36 +536,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2462909931220215103, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3623104323739898729, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4452872500322542027, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6234574541612155006, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7815661024147529319, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8476257762135627928, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 9047516454297223626, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
       propertyPath: textUI_TimeBank
-      value: 
-      objectReference: {fileID: 1869202409}
-    - target: {fileID: 9047516454297223626, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: textRewindTimeBank
       value: 
       objectReference: {fileID: 1869202409}
     m_RemovedComponents: []

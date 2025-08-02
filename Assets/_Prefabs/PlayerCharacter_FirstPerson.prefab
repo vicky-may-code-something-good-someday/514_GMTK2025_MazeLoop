@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4376172046630305978}
   - component: {fileID: 3159534273627049395}
   - component: {fileID: 9047516454297223626}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerCharacter_FirstPerson
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -137,9 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40487213a5902d4c8da2d080e5d5497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewindSpeed: 1
-  maxRewindTime_InSeconds: 180
-  textRewindTimeBank: {fileID: 0}
+  rewindSpeed: 2
+  maxRewindedTime_inSeconds: 600
+  isRewinderCollected: 1
+  textUI_TimeBank: {fileID: 0}
 --- !u!1 &2462909931220215103
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +152,7 @@ GameObject:
   - component: {fileID: 7319542856001595817}
   - component: {fileID: 4096398955503951708}
   - component: {fileID: 4441607650478964956}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791636370496168659}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +273,7 @@ GameObject:
   - component: {fileID: 5819573355307635468}
   - component: {fileID: 1024899313175598030}
   - component: {fileID: 1040092028980444162}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -421,7 +422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825494035574137379}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +455,7 @@ GameObject:
   - component: {fileID: 8518752899884575899}
   - component: {fileID: 1453659451235587477}
   - component: {fileID: 2037682483826846795}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7229640499008521558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
