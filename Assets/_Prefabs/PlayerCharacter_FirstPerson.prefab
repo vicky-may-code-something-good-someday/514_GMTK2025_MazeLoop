@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1597876357490965763}
   - component: {fileID: 4376172046630305978}
   - component: {fileID: 3159534273627049395}
-  m_Layer: 9
+  - component: {fileID: 9047516454297223626}
+  m_Layer: 0
   m_Name: PlayerCharacter_FirstPerson
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +83,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -113,12 +114,32 @@ MonoBehaviour:
   normalFOV: 60
   maxSprintFOV: 70
   fovChangeSpeed: 8
-  gravity: -9.81
-  groundCheck: {fileID: 2111440495359995585}
+  jumpHeight: 2
+  jumpHoldTime: 0.2
+  jumpHoldGravityMultiplier: 0.5
+  baseFallGravity: 10
+  maxFallGravity: 50
+  fallGravityScaling: 1.5
+  groundCheck: {fileID: 1825494035574137379}
   groundMask:
     serializedVersion: 2
     m_Bits: 1
   groundDistance: 0.4
+--- !u!114 &9047516454297223626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608425576210504766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40487213a5902d4c8da2d080e5d5497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewindSpeed: 1
+  maxRewindTime_InSeconds: 180
+  textRewindTimeBank: {fileID: 0}
 --- !u!1 &2462909931220215103
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +151,7 @@ GameObject:
   - component: {fileID: 7319542856001595817}
   - component: {fileID: 4096398955503951708}
   - component: {fileID: 4441607650478964956}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +168,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.75, y: 0.9, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8518752899884575899}
@@ -215,7 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791636370496168659}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825494035574137379}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +437,7 @@ Transform:
   m_GameObject: {fileID: 6234574541612155006}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.05, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -433,7 +454,7 @@ GameObject:
   - component: {fileID: 8518752899884575899}
   - component: {fileID: 1453659451235587477}
   - component: {fileID: 2037682483826846795}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7229640499008521558}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -67,7 +67,6 @@ public class CharacterController_FirstPerson : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(currentFallGravity);
         HandleSprintInput();
         HandleMovement();
         HandleJump();
@@ -109,7 +108,6 @@ public class CharacterController_FirstPerson : MonoBehaviour
             currentFallGravity += fallGravityScaling * Time.deltaTime * currentFallGravity;
             currentFallGravity = Mathf.Clamp(currentFallGravity, baseFallGravity, maxFallGravity);
             velocity.y -= currentFallGravity * Time.deltaTime;
-            //Debug.Log(currentFallGravity);
         }
 
         // Get input
