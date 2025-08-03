@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public SaveGame currentSaveGame;
+
     // Singleton
     public static GameManager GM { get; private set; }
 
@@ -18,6 +20,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        currentSaveGame = GetComponent<SaveGame>();
+
     }
 
     [Header("Interactables")]
@@ -29,10 +34,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Dictionary<Door, bool> doorsDictionary = new Dictionary<Door, bool>();
     [HideInInspector] public Dictionary<Button, bool> buttonsDictionary = new Dictionary<Button, bool>();
 
-    public SaveGame currentSaveGame;
-
     public RewindData rewindData;
-
+    public CharacterController_FirstPerson characterController;
+    public GameObject RewindDevice;
 
     [SerializeField] TMP_Text text_gameTime;
     //float rewindedTime = 0f;
@@ -42,12 +46,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CreateInteractablesList();
+        UpdateInteractablesList();
     }
 
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            LoadSaveFile();
+        }
+
+
         if (!pauseGameTime)
         {
             gameTime += Time.deltaTime;
@@ -67,7 +77,7 @@ public class GameManager : MonoBehaviour
         pauseGameTime = state;
     }
 
-    public void CreateInteractablesList()
+    public void UpdateInteractablesList()
     {
         batteriesList = new List<Battery>(FindObjectsByType<Battery>(FindObjectsSortMode.None));
         foreach (var battery in batteriesList)
@@ -94,25 +104,66 @@ public class GameManager : MonoBehaviour
 
     public void LoadSaveFile()
     {
-        if (currentSaveGame == null) return;
-        //restart the game?
+        if (currentSaveGame == null)
+        {
+            Debug.LogWarning("No save file found. Cannot load game state.");
+            return;
+            //restart the game?
+        }
 
-        rewindData.transform.parent.position = currentSaveGame.savedPlayerPosition;
-        rewindData.transform.parent.rotation = currentSaveGame.savedPlayerRotation;
+        //Reset Movement and Rewind Mechanics
+        characterController.FreezeMovement();
+        characterController.UnfreezeMovement();
 
+        rewindData.StopRewind();
+        rewindData.UnfreezeRewindMechanic();
+
+        //Set to Checkpoint Position/Rotation
+        CharacterController cc = rewindData.GetComponent<CharacterController>();
+        if (cc != null)
+        {
+            cc.enabled = false; // disable before changing position
+        }
+
+        rewindData.transform.position = currentSaveGame.savedPlayerPosition + new Vector3(0, 1f, 0); // Adjust Y position to avoid ground clipping
+        rewindData.transform.rotation = currentSaveGame.savedPlayerRotation;
+
+        if (cc != null)
+        {
+            cc.enabled = true; // re-enable after changing position
+        }
+
+        //Set TimerData to Saved State
         rewindData.isDeviceCollected = currentSaveGame.savedIsDeviceCollected;
+
+        if (RewindDevice != null)
+        {
+            RewindDevice.SetActive(!currentSaveGame.savedIsDeviceCollected);
+            //bug that ui is not updated if the device is not collected anymore
+        }
+
         rewindData.rewindTimeBank = currentSaveGame.savedRewindTimeBank;
-        rewindData.objectStatesInTime = currentSaveGame.savedObjectStatesInTime;
+        rewindData.objectStatesInTime.Clear();
+        foreach (var state in currentSaveGame.savedObjectStatesInTime)
+        {
+            rewindData.objectStatesInTime.Add(state);
+        }
 
         gameTime = currentSaveGame.savedGameTime;
 
+        //Reset Timer UI
+        rewindData.SetUI_TimeBank();
+        text_gameTime.text = gameTime.ToString("F2");
 
 
+        //Set Interables to Saved State
         for (int i = 0; i < batteriesList.Count; i++)
         {
             if (currentSaveGame.savedBatteries.ContainsKey(batteriesList[i]))
             {
                 batteriesList[i].isCollected = currentSaveGame.savedBatteries[batteriesList[i]];
+
+                batteriesList[i].transform.parent.gameObject.SetActive(!batteriesList[i].isCollected);
             }
             else
             {
@@ -124,6 +175,6 @@ public class GameManager : MonoBehaviour
         GM.doorsDictionary = currentSaveGame.savedDoors;
         GM.buttonsDictionary = currentSaveGame.savedButtons;
 
-        CreateInteractablesList();
+        UpdateInteractablesList();
     }
 }

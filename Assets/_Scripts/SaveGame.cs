@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class SaveGame : MonoBehaviour
 {
-    public Vector3 savedPlayerPosition;
-    public Quaternion savedPlayerRotation;
+    public Vector3 savedPlayerPosition = Vector3.zero;
+    public Quaternion savedPlayerRotation = Quaternion.identity;
 
 
-    public bool savedIsDeviceCollected;
-    public float savedRewindTimeBank;
+    public bool savedIsDeviceCollected = false;
+    public float savedRewindTimeBank = 0f;
     public List<StateInTime> savedObjectStatesInTime = new List<StateInTime>();
-    public float savedGameTime;
+    public float savedGameTime = 0f;
 
     //collected or not
     public Dictionary<Battery, bool> savedBatteries = new Dictionary<Battery, bool>();

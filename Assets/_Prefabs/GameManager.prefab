@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1544858226583083847}
   - component: {fileID: 4246306017475919369}
   - component: {fileID: 8127092927911257976}
+  - component: {fileID: 5698861189670554735}
+  - component: {fileID: 5879434030335662708}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,7 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c377ca6e47f6748a8ad63d75c38ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  batteriesList: []
+  doorsList: []
+  buttonsList: []
+  currentSaveGame: {fileID: 5879434030335662708}
+  rewindData: {fileID: 0}
   text_gameTime: {fileID: 0}
+  gameTime: 0
 --- !u!114 &8127092927911257976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,3 +68,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doors: []
   buttons: []
+--- !u!114 &5698861189670554735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693994619802795043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9b9e8b44e50324ca0f5c0b0b807a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoints: []
+--- !u!114 &5879434030335662708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693994619802795043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b070da864fcfbb0429d6b6997f0008a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  savedPlayerPosition: {x: 0, y: 0, z: 0}
+  savedPlayerRotation: {x: 0, y: 0, z: 0, w: 0}
+  savedIsDeviceCollected: 0
+  savedRewindTimeBank: 0
+  savedGameTime: 0

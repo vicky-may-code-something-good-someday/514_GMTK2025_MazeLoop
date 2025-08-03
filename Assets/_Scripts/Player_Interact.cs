@@ -69,6 +69,10 @@ public class Player_Interact : MonoBehaviour
         {
             targetInteractable.GetInteracted(gameObject);
         }
+        else
+        {
+            Debug.LogWarning("No interactable object found to interact with.");
+        }
 
     }
 }

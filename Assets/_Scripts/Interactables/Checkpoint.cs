@@ -3,10 +3,10 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [Header("References")]
-    public SaveGame saveGame;
-    public RewindData rewindData;
 
     GameManager GM;
+    public SaveGame saveGame;
+    public RewindData rewindData;
 
     private void Awake()
     {
@@ -14,7 +14,7 @@ public class Checkpoint : MonoBehaviour
     }
 
 
-    public void ActivateCheckpoint()
+    public void SaveGameAtCheckpoint()
     {
         ResetSaveFile();
 
@@ -36,15 +36,19 @@ public class Checkpoint : MonoBehaviour
 
     void SaveNewSaveFile()
     {
-        saveGame.savedPlayerPosition = rewindData.transform.parent.position;
-        saveGame.savedPlayerRotation = rewindData.transform.parent.rotation;
+        saveGame.savedPlayerPosition = transform.parent.position;
+        saveGame.savedPlayerRotation = transform.parent.rotation;
 
         saveGame.savedIsDeviceCollected = rewindData.isDeviceCollected;
         saveGame.savedRewindTimeBank = rewindData.rewindTimeBank;
-        saveGame.savedObjectStatesInTime = rewindData.objectStatesInTime;
+        saveGame.savedObjectStatesInTime.Clear();
+        foreach (var state in rewindData.objectStatesInTime)
+        {
+            saveGame.savedObjectStatesInTime.Add(state);
+        }
         saveGame.savedGameTime = GM.gameTime;
 
-        GM.CreateInteractablesList();
+        GM.UpdateInteractablesList();
 
         saveGame.savedBatteries = GM.batteriesDictionary;
         saveGame.savedDoors = GM.doorsDictionary;

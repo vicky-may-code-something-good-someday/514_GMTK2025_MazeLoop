@@ -146,7 +146,7 @@ public class RewindData : MonoBehaviour
         //Debug.Log("Rewind started");
     }
 
-    void StopRewind()
+    public void StopRewind()
     {
         isRewinding = false;
         rb.isKinematic = false;
@@ -185,6 +185,11 @@ public class RewindData : MonoBehaviour
     {
         isDeviceCollected = true;
         textUI_TimeBank.gameObject.SetActive(true);
+    }
+
+    public void SetUI_TimeBank()
+    {
+        textUI_TimeBank.text = $"Rewind Time Bank: {rewindTimeBank:F2}";
     }
 
 }
