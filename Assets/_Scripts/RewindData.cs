@@ -9,7 +9,8 @@ public class RewindData : MonoBehaviour
     [Header("Rewind Settings")]
     [SerializeField] int rewindSpeed = 2;
     [SerializeField] int maxRewindedTime_inSeconds = 600;
-    [SerializeField] bool isRewindingPossible = false;
+    [SerializeField] bool isDeviceCollected = false;
+    [SerializeField] bool isRecordingRewindingPossible = true;
 
     bool isRewinding = false;
     float rewindTimeBank = 10f;
@@ -49,7 +50,7 @@ public class RewindData : MonoBehaviour
         }
 
 
-        if (isRewindingPossible)
+        if (isDeviceCollected)
         {
             ActivateRewindMechanic();
         }
@@ -57,7 +58,7 @@ public class RewindData : MonoBehaviour
 
     void Update()
     {
-        if (isRewindingPossible)
+        if (isDeviceCollected)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -72,11 +73,11 @@ public class RewindData : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isRewinding && isRewindingPossible)
+        if (isRewinding && isDeviceCollected && isRecordingRewindingPossible)
         {
             Rewind();
         }
-        else
+        else if (isRecordingRewindingPossible)
         {
             Record();
         }
@@ -98,6 +99,16 @@ public class RewindData : MonoBehaviour
 
     void Rewind()
     {
+        // Remove states based on rewind speed
+        // Problem: only works with integer rewind speeds
+        for (int i = 0; i < rewindSpeed; i++)
+        {
+            if (objectStatesInTime.Count > 0)
+            {
+                objectStatesInTime.RemoveAt(0);
+            }
+        }
+
         if (objectStatesInTime.Count <= 0)
         {
             Debug.LogWarning("No positions to rewind to.");
@@ -110,23 +121,15 @@ public class RewindData : MonoBehaviour
             StopRewind();
             return;
         }
+
+        transform.SetPositionAndRotation(objectStatesInTime[0].Position, objectStatesInTime[0].Rotation);
+
+
         rewindTimeBank -= Time.fixedDeltaTime * rewindSpeed;
         rewindTimeBank = Mathf.Max(rewindTimeBank, 0f);
         textUI_TimeBank.text = $"Rewind Time Bank: {rewindTimeBank:F2}";
+
         GM.RewindGameTime(Time.fixedDeltaTime, rewindSpeed);
-
-        transform.SetPositionAndRotation(objectStatesInTime[0].Position, objectStatesInTime[0].Rotation);
-        objectStatesInTime.RemoveAt(0);
-
-        // Remove states based on rewind speed
-        // Problem: only works with integer rewind speeds
-        for (int i = 0; i < rewindSpeed; i++)
-        {
-            if (objectStatesInTime.Count > 0)
-            {
-                objectStatesInTime.RemoveAt(0);
-            }
-        }
 
     }
 
@@ -138,6 +141,8 @@ public class RewindData : MonoBehaviour
 
         characterController.enabled = false;
 
+        GM.SetPauseGameTime(true);
+
         //Debug.Log("Rewind started");
     }
 
@@ -147,6 +152,8 @@ public class RewindData : MonoBehaviour
         rb.isKinematic = false;
 
         characterController.enabled = true;
+
+        GM.SetPauseGameTime(false);
 
         //Debug.Log("Rewind stopped");
     }
@@ -163,20 +170,20 @@ public class RewindData : MonoBehaviour
     {
         if (!isRewinding)
         {
-            isRewindingPossible = false;
+            isRecordingRewindingPossible = false;
             GM.SetPauseGameTime(true);
         }
     }
 
     public void UnfreezeRewindMechanic()
     {
-        isRewindingPossible = true;
+        isRecordingRewindingPossible = true;
         GM.SetPauseGameTime(false);
     }
 
     public void ActivateRewindMechanic()
     {
-        isRewindingPossible = true;
+        isDeviceCollected = true;
         textUI_TimeBank.gameObject.SetActive(true);
     }
 
