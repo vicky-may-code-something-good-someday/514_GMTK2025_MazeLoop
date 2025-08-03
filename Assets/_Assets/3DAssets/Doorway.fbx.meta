@@ -3,7 +3,37 @@ guid: 14a65913139648f499bb049801765dbe
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DOOR_emmision
+    second: {fileID: 2100000, guid: 5e7e6802f30524640adb12ac347634cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 5ebd58f379c4003489af8b8230fd232c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: beam
+    second: {fileID: 2100000, guid: 049e2dea6d4c6f349abc1b85922f0501, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: doors
+    second: {fileID: 2100000, guid: 21e631f0544f3834a89d7468aba0bcc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: exit
+    second: {fileID: 2100000, guid: add1524318e89974691040d4ff72298b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall_1
+    second: {fileID: 2100000, guid: a5fccaf7d68f8d94cbb5b2d23c90fbf2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
