@@ -9,12 +9,12 @@ public class RewindData : MonoBehaviour
     [Header("Rewind Settings")]
     [SerializeField] int rewindSpeed = 2;
     [SerializeField] int maxRewindedTime_inSeconds = 600;
-    [SerializeField] bool isDeviceCollected = false;
+    public bool isDeviceCollected = false;
     [SerializeField] bool isRecordingRewindingPossible = true;
 
     bool isRewinding = false;
-    [SerializeField] float rewindTimeBank = 10f;
-    List<StateInTime> objectStatesInTime = new List<StateInTime>();
+    public float rewindTimeBank = 10f;
+    public List<StateInTime> objectStatesInTime = new List<StateInTime>();
 
     [Header("References")]
     [SerializeField] TMP_Text textUI_TimeBank;

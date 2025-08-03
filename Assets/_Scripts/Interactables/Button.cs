@@ -8,7 +8,7 @@ public class Button : MonoBehaviour
     [Tooltip("This Button opens every Door with the same ConnectionCode")]
     public int ButtonConnectionCode;
 
-    bool isActivated = false;
+    public bool isActivated = false;
 
     public void UnlockConnectedDoor()
     {

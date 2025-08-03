@@ -5694,7 +5694,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1693994619802795043, guid: 7c25eee261321e347977a77a0d491550, type: 3}
   m_PrefabInstance: {fileID: 6605747320460628054}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &554051853
+--- !u!114 &554051854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5703,11 +5703,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 554051850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ef2abe392d420d4ca97bc6751d5730b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9b9e8b44e50324ca0f5c0b0b807a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors: []
-  buttons: []
+  checkpoints: []
 --- !u!1 &657227171
 GameObject:
   m_ObjectHideFlags: 0
@@ -5895,10 +5894,6 @@ PrefabInstance:
     - target: {fileID: 2111440495359995585, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9047516454297223626, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
-      propertyPath: rewindSpeed
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9047516454297223626, guid: a2faea5b8dd51f3489349b73f5d418fe, type: 3}
       propertyPath: textUI_TimeBank
@@ -8111,7 +8106,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1693994619802795043, guid: 7c25eee261321e347977a77a0d491550, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 554051853}
+      addedObject: {fileID: 554051854}
   m_SourcePrefab: {fileID: 100100000, guid: 7c25eee261321e347977a77a0d491550, type: 3}
 --- !u!1001 &6664973575271283994
 PrefabInstance:
@@ -8181,10 +8176,10 @@ SceneRoots:
   - {fileID: 791323852}
   - {fileID: 1201850299}
   - {fileID: 1951180517}
+  - {fileID: 1488802204}
   - {fileID: 389526857}
   - {fileID: 2129988969}
-  - {fileID: 1877791258}
   - {fileID: 1566768809}
-  - {fileID: 1488802204}
+  - {fileID: 1877791258}
   - {fileID: 782826354}
   - {fileID: 786673085}

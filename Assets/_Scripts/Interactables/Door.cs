@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 {
     [SerializeField] DOTweenAnimation openDoorAnimation;
 
-    [SerializeField] bool isLocked = false;
+    public bool isUnlocked = false;
     bool isOpen = false;
 
     [Tooltip("This Door gets opened by every Button with the same ConnectionCode")]
@@ -15,7 +15,7 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        if (isLocked)
+        if (!isUnlocked)
         {
             //play door is locked sound
             //Debug.LogWarning("Door is locked.");
@@ -37,7 +37,7 @@ public class Door : MonoBehaviour
 
     public void UnlockDoor()
     {
-        isLocked = false;
+        isUnlocked = true;
     }
 
 }
