@@ -36,7 +36,7 @@ public class MusicPlayer : MonoBehaviour
         // Set up default source
         defaultSource.clip = defaultMusic;
         defaultSource.loop = true;
-        defaultSource.volume = 1f;
+        defaultSource.volume = 0.5f;
         defaultSource.Play();
 
         // Set up reverse source
@@ -54,11 +54,11 @@ public class MusicPlayer : MonoBehaviour
         if (rewindDate.isRewinding)
         {
             defaultSource.volume = 0f;
-            reverseSource.volume = 1f;
+            reverseSource.volume = 0.5f;
         }
         else
         {
-            defaultSource.volume = 1f;
+            defaultSource.volume = 0.5f;
             reverseSource.volume = 0f;
         }
 
