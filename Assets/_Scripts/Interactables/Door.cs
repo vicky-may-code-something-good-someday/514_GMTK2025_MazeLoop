@@ -15,6 +15,12 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
+        if (isOpen)
+        {
+            //Debug.Log("Door is already open.");
+            return;
+        }
+
         if (!isUnlocked)
         {
             //play door is locked sound
@@ -22,14 +28,8 @@ public class Door : MonoBehaviour
             return;
         }
 
-        if (isOpen)
-        {
-            //Debug.Log("Door is already open.");
-            return;
-        }
-
         isOpen = true;
-
+        Debug.Log($"Opening door with ConnectionCode: {DoorConnectionCode}");
         openDoorAnimation.DOPlay();
 
         GetComponent<Collider>().enabled = false; // Disable trigger collider
