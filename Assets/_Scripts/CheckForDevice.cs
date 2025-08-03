@@ -4,40 +4,37 @@ using UnityEngine;
 
 public class CheckForDevice : MonoBehaviour
 {
-    [SerializeField] DOTweenAnimation openDoorAnimation;
-
-    public bool isUnlocked = false;
-    bool isOpen = false;
-
-    [Tooltip("This Door gets opened by every Button with the same ConnectionCode")]
-    public int DoorConnectionCode;
+    public RewindData rewindData;
 
 
-    public void OpenDoor()
+    [Tooltip("If false, the door has to be manually opened and will only be unlocked")]
+    public bool openDoorDirectly = true;
+
+    [Tooltip("This Button opens every Door with the same ConnectionCode")]
+    public int ButtonConnectionCode;
+
+    public bool isActivated = false;
+
+    public void UnlockConnectedDoor()
     {
-        if (isOpen)
+        if (rewindData.isDeviceCollected)
         {
-            //Debug.Log("Door is already open.");
-            return;
+
+            if (isActivated)
+            {
+                //Debug.LogWarning("Button is already activated.");
+                return;
+            }
+
+
+            isActivated = true;
+
+            if (openDoorDirectly)
+            {
+                DoorManager.Instance.UnlockDoorsByID(ButtonConnectionCode, openDoorDirectly);
+            }
+
+            GetComponent<Collider>().enabled = false; // Disable trigger collider
         }
-
-        if (!isUnlocked)
-        {
-            //play door is locked sound
-            //Debug.LogWarning("Door is locked.");
-            return;
-        }
-
-        isOpen = true;
-        Debug.Log($"Opening door with ConnectionCode: {DoorConnectionCode}");
-        openDoorAnimation.DOPlay();
-
-        GetComponent<Collider>().enabled = false; // Disable trigger collider
     }
-
-    public void UnlockDoor()
-    {
-        isUnlocked = true;
-    }
-
 }
