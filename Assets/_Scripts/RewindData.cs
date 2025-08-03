@@ -33,7 +33,7 @@ public class RewindData : MonoBehaviour
         }
         else
         {
-            textUI_TimeBank.gameObject.SetActive(false);
+            textUI_TimeBank.gameObject.SetActive(true);  //CHANGE TO FALSE
             textUI_TimeBank.SetText($"Rewind Time Bank: {rewindTimeBank:F2}");
         }
 
@@ -130,8 +130,7 @@ public class RewindData : MonoBehaviour
 
         characterController.enabled = false;
 
-
-        Debug.Log("Rewind started");
+        //Debug.Log("Rewind started");
     }
 
     void StopRewind()
@@ -141,7 +140,7 @@ public class RewindData : MonoBehaviour
 
         characterController.enabled = true;
 
-        Debug.Log("Rewind stopped");
+        //Debug.Log("Rewind stopped");
     }
 
 
