@@ -13,7 +13,7 @@ public class RewindData : MonoBehaviour
     [SerializeField] bool isRecordingRewindingPossible = true;
 
     bool isRewinding = false;
-    float rewindTimeBank = 10f;
+    [SerializeField] float rewindTimeBank = 10f;
     List<StateInTime> objectStatesInTime = new List<StateInTime>();
 
     [Header("References")]
