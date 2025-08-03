@@ -41,7 +41,7 @@ public class CharacterController_FirstPerson : MonoBehaviour
     public float groundDistance = 0.4f;
 
     private CharacterController controller;
-    private Vector3 velocity;
+    public Vector3 velocity;
     private bool isGrounded = true;
 
     // Internal sprint state
