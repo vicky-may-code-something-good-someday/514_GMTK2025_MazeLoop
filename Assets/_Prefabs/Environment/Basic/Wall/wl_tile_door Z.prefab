@@ -65,7 +65,9 @@ PrefabInstance:
       value: Doorway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2439269024498603303, guid: 14a65913139648f499bb049801765dbe, type: 3}
+    - {fileID: -8740740162015822184, guid: 14a65913139648f499bb049801765dbe, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8068073526183931155, guid: 14a65913139648f499bb049801765dbe, type: 3}
