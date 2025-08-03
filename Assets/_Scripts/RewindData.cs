@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.WSA;
 
 public class RewindData : MonoBehaviour
 {
@@ -12,7 +10,7 @@ public class RewindData : MonoBehaviour
     public bool isDeviceCollected = false;
     [SerializeField] bool isRecordingRewindingPossible = true;
 
-    bool isRewinding = false;
+    public bool isRewinding = false;
     public float rewindTimeBank = 10f;
     public List<StateInTime> objectStatesInTime = new List<StateInTime>();
 
