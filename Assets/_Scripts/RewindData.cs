@@ -9,7 +9,7 @@ public class RewindData : MonoBehaviour
     [Header("Rewind Settings")]
     [SerializeField] int rewindSpeed = 2;
     [SerializeField] int maxRewindedTime_inSeconds = 600;
-    [SerializeField] bool isRewindingPossible = true;
+    [SerializeField] bool isRewindingPossible = false;
 
     bool isRewinding = false;
     float rewindTimeBank = 10f;
@@ -26,16 +26,6 @@ public class RewindData : MonoBehaviour
     {
         characterController = GetComponent<CharacterController_FirstPerson>();
         rb = GetComponent<Rigidbody>();
-        GM = GameManager.GM;
-        if (textUI_TimeBank == null)
-        {
-            Debug.LogError("TextRewindTimeBank is not assigned in the inspector.");
-        }
-        else
-        {
-            textUI_TimeBank.gameObject.SetActive(true);  //CHANGE TO FALSE
-            textUI_TimeBank.SetText($"Rewind Time Bank: {rewindTimeBank:F2}");
-        }
 
         if (characterController == null)
         {
@@ -44,6 +34,24 @@ public class RewindData : MonoBehaviour
         if (rb == null)
         {
             Debug.LogError($"Rigidbody component not found on {gameObject.name}.");
+        }
+
+        GM = GameManager.GM;
+
+        if (textUI_TimeBank == null)
+        {
+            Debug.LogError("TextRewindTimeBank is not assigned in the inspector.");
+        }
+        else
+        {
+            textUI_TimeBank.gameObject.SetActive(false);
+            textUI_TimeBank.SetText($"Rewind Time Bank: {rewindTimeBank:F2}");
+        }
+
+
+        if (isRewindingPossible)
+        {
+            ActivateRewindMechanic();
         }
     }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1597876357490965763}
   - component: {fileID: 4376172046630305978}
   - component: {fileID: 3159534273627049395}
+  - component: {fileID: 9176968670370955121}
   - component: {fileID: 9047516454297223626}
   m_Layer: 3
   m_Name: PlayerCharacter_FirstPerson
@@ -125,6 +126,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   groundDistance: 0.4
+--- !u!114 &9176968670370955121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608425576210504766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d576b423a226aa24b8245bd1c021a17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text_PressToInteract: {fileID: 0}
 --- !u!114 &9047516454297223626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewindSpeed: 2
   maxRewindedTime_inSeconds: 600
-  isRewinderCollected: 1
+  isRewindingPossible: 1
   textUI_TimeBank: {fileID: 0}
 --- !u!1 &2462909931220215103
 GameObject:

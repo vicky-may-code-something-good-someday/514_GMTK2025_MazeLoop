@@ -67,7 +67,7 @@ public class Player_Interact : MonoBehaviour
     {
         if (targetInteractable != null)
         {
-            targetInteractable.GetInteracted();
+            targetInteractable.GetInteracted(gameObject);
         }
 
     }
