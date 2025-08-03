@@ -8,7 +8,7 @@ public class RewindDevice : MonoBehaviour
         GameObject interactor = gameObject.GetComponent<InteractableObj>().Interactor;
         if (interactor == null)
         {
-            Debug.LogWarning("No interactor found. Cannot collect battery.");
+            Debug.LogWarning("No interactor found. Cannot collect rewind device.");
             return;
         }
 
@@ -16,6 +16,7 @@ public class RewindDevice : MonoBehaviour
 
         //implement feedback effects of the rewind device being collected
 
-        Destroy(transform.parent.gameObject); // Destroy the rewind device object after collection
+        transform.parent.gameObject.SetActive(false);
+        //Destroy(transform.parent.gameObject);
     }
 }

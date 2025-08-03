@@ -3,10 +3,12 @@ using UnityEngine.Events;
 
 public class InteractableObj : MonoBehaviour
 {
+    public bool isInteractable = true;
+    //The hitbox would still be there meaning the UI for Press [E] to interact would still be visible
+
 
     [SerializeField] UnityEvent interaction;
 
-    public bool isInteractable = true;
     public GameObject Interactor { get; private set; }
 
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
-    [SerializeField] float BatteryTimeCharge = 10f;
+    [SerializeField] float AddedTimeCharge = 10f;
 
     public void GetCollected()
     {
@@ -13,12 +13,13 @@ public class Battery : MonoBehaviour
             return;
         }
 
-        interactor.GetComponent<RewindData>()?.AddTimeBank(BatteryTimeCharge);
+        interactor.GetComponent<RewindData>()?.AddTimeBank(AddedTimeCharge);
 
 
         //implement feedback effects of the battery being collected
 
-        Destroy(transform.parent.gameObject); // Destroy the battery object after collection
+        transform.parent.gameObject.SetActive(false);
+        //Destroy(transform.parent.gameObject);
     }
 
 

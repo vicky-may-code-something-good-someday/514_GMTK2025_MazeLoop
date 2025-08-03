@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewindSpeed: 2
   maxRewindedTime_inSeconds: 600
-  isRewindingPossible: 1
+  isRewindingPossible: 0
   textUI_TimeBank: {fileID: 0}
 --- !u!1 &2462909931220215103
 GameObject:
