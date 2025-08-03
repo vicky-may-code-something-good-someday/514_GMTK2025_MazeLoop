@@ -47,11 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c377ca6e47f6748a8ad63d75c38ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSaveGame: {fileID: 0}
   batteriesList: []
   doorsList: []
   buttonsList: []
-  currentSaveGame: {fileID: 5879434030335662708}
   rewindData: {fileID: 0}
+  characterController: {fileID: 0}
+  RewindDevice: {fileID: 0}
   text_gameTime: {fileID: 0}
   gameTime: 0
 --- !u!114 &8127092927911257976

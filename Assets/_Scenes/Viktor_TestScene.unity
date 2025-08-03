@@ -8451,10 +8451,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 657227173}
     - target: {fileID: 4246306017475919369, guid: 7c25eee261321e347977a77a0d491550, type: 3}
-      propertyPath: currentSaveGame
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4246306017475919369, guid: 7c25eee261321e347977a77a0d491550, type: 3}
       propertyPath: characterController
       value: 
       objectReference: {fileID: 782826358}
