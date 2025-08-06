@@ -12,7 +12,9 @@ public class MusicPlayer : MonoBehaviour
     [Header("References")]
     public RewindData rewindDate;
 
+    [SerializeField]
     private AudioSource defaultSource;
+    [SerializeField]
     private AudioSource reverseSource;
 
     private bool isUsingIntenseMusic = false;
@@ -29,9 +31,6 @@ public class MusicPlayer : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Create two audio sources
-        defaultSource = gameObject.AddComponent<AudioSource>();
-        reverseSource = gameObject.AddComponent<AudioSource>();
 
         // Set up default source
         defaultSource.clip = defaultMusic;
@@ -64,7 +63,7 @@ public class MusicPlayer : MonoBehaviour
 
         // Handle music intensity swap
         float gameTime = GameManager.GM.gameTime;
-
+        /*
         if (gameTime > 20f && !isUsingIntenseMusic)
         {
             defaultSource.Stop();
@@ -78,7 +77,7 @@ public class MusicPlayer : MonoBehaviour
             defaultSource.clip = defaultMusic;
             defaultSource.Play();
             isUsingIntenseMusic = false;
-        }
+        }*/
     }
 }
 
