@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -34,7 +34,7 @@ RenderSettings:
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
-  m_ReflectionBounces: 1
+  m_ReflectionBounces: 2
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
@@ -94,7 +94,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 47d50fb4ced123f45a6b920e3b00e07f, type: 2}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: ed7951117316c4f43a644394b77e6a7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2381,6 +2381,14 @@ PrefabInstance:
     - target: {fileID: 7549992500630541623, guid: 55900ba351ccd90409472b13f2da1864, type: 3}
       propertyPath: DoorConnectionCode
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036321427797705993, guid: 55900ba351ccd90409472b13f2da1864, type: 3}
+      propertyPath: m_SpotAngle
+      value: 71.43048
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036321427797705993, guid: 55900ba351ccd90409472b13f2da1864, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 15.9032135
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
