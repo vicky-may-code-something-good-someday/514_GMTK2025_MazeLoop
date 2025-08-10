@@ -158,7 +158,7 @@ MonoBehaviour:
   isDeviceCollected: 0
   isRecordingRewindingPossible: 1
   isRewinding: 0
-  rewindTimeBank: 10
+  rewindTimeBank: 0
   textUI_TimeBank: {fileID: 0}
 --- !u!1 &2462909931220215103
 GameObject:
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb7c3c27cbd1ea48ac4171aa4660257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 3159534273627049395}
+  controller: {fileID: 4376172046630305978}
   footstepClips:
   - {fileID: 8300000, guid: 31827a7e69015ca4c9c38ca976955f95, type: 3}
   - {fileID: 8300000, guid: e76907f4de12ec448810bb53f27ada9b, type: 3}
@@ -589,9 +589,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b804dc95bde7a3847ae5d4e0eb758148, type: 3}
   - {fileID: 8300000, guid: 796336c45eaadb24ca3a6f71f91ab2d8, type: 3}
   - {fileID: 8300000, guid: 636e6da7d0602634c8e2243ac6b99f37, type: 3}
-  stepInterval: 0.5
   maxVolume: 1
-  speedThreshold: 0.1
+  pitchRange: {x: 0.97, y: 1.03}
+  stepDistance: 1.5
+  speedThreshold: 0.2
+  maxSpeed: 15
+  debugLog: 1
 --- !u!1 &6234574541612155006
 GameObject:
   m_ObjectHideFlags: 0

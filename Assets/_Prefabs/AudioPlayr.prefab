@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3119347341965598904}
   - component: {fileID: 2380812209804056255}
+  - component: {fileID: 4639528711107991919}
   m_Layer: 0
   m_Name: AudioPlayr
   m_TagString: Untagged
@@ -48,3 +49,28 @@ MonoBehaviour:
   intenseMusic: {fileID: 8300000, guid: ab1975c058381e74e8ce3f253e5f0b4a, type: 3}
   reverseMusic: {fileID: 8300000, guid: 1a80f1f41d444e04eaa1220011b26240, type: 3}
   rewindDate: {fileID: 0}
+  defaultSource: {fileID: 0}
+  reverseSource: {fileID: 0}
+  baseTrackVolume: 0.1
+  masterVolume: 1
+  volumeStep: 0.1
+--- !u!114 &4639528711107991919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6089893017584485146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a994be81a4c09e14381e555418f89f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialPoolSize: 8
+  allowPoolExpansion: 1
+  defaultVolume: 1
+  spatialBlend3D: 1
+  rolloffMode: 1
+  minDistance: 1
+  maxDistance: 25
+  outputMixerGroup: {fileID: 0}
